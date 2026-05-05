@@ -1,6 +1,6 @@
 # Semantic Search Engine (PyTorch)
 
-##Project Overview
+## Project Overview
 
 This project is a simple semantic search engine built using a pretrained embedding model.
 
