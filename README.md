@@ -1,6 +1,6 @@
 # Semantic Search Engine (PyTorch)
 
-## 📌 Project Overview
+##Project Overview
 
 This project is a simple semantic search engine built using a pretrained embedding model.
 
@@ -8,7 +8,7 @@ It converts text into vectors and finds the most similar documents using cosine 
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
 The system follows this pipeline:
 
@@ -21,7 +21,7 @@ text → embedding → similarity → ranking
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 - Python
 - PyTorch (via Sentence Transformers)
@@ -31,7 +31,7 @@ text → embedding → similarity → ranking
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ### 1. Install dependencies
 
