@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Search Engine</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .score {
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Semantic Search Engine</h1>
+
+        <input type="text" id="query" placeholder="Enter search query">
+        <button onclick="search()">Search</button>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function search() {
+            const query = document.getElementById("query").value;
+
+            const response = await fetch("/search", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ query: query })
+            });
+
+            const data = await response.json();
+
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            data.results.forEach(result => {
+                resultsDiv.innerHTML += `
+                    <div class="result">
+                        <strong>${result.document}</strong>
+                        <div class="score">
+                            Similarity Score: ${result.score.toFixed(4)}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
+
+</body>
+</html>
