@@ -1,132 +1,57 @@
-# Semantic Search Engine (PyTorch + FAISS + Flask)
+# Semantic Search Engine
 
-## Project Overview
+A prototype semantic document retrieval system built with Python and PyTorch. Unlike keyword search, this system understands the *meaning* of a query and returns semantically relevant results even when exact words don't match.
 
-This project is a semantic search engine built using transformer embeddings.
+## What it does
 
-It converts text into vector embeddings and retrieves the most semantically similar documents using FAISS vector search.
+- Encodes documents and queries into dense vector representations using transformer-based sentence embeddings
+- Uses **FAISS** for fast approximate nearest-neighbor search — no brute-force comparison needed even as the corpus grows
+- Ranks results by cosine similarity between query and document embeddings
+- Flask interface for testing and demonstrating retrieval
 
-The project also includes:
+## How it works
 
-- FAISS vector indexing
-- Flask REST API
-- Interactive web interface
-- Persistent embedding storage
-
----
-
-## Features
-
-- Semantic search using embeddings
-- Transformer-based text vectorization
-- Cosine similarity retrieval
-- FAISS vector indexing for scalable search
-- Flask backend API
-- Web frontend interface
-- Saved embeddings and FAISS indexes
-- Modular project structure
-
----
-
-## Technologies Used
-
-- Python
-- PyTorch
-- Sentence Transformers
-- FAISS
-- Flask
-- NumPy
-- scikit-learn
-
----
-
-## Project Structure
-
-```text
-semantic_search_engine/
-│
-├── data/
-├── embeddings/
-├── src/
-├── templates/
-├── README.md
-├── requirements.txt
-└── .gitignore
+```
+Query text
+    ↓
+Transformer model (sentence embeddings)
+    ↓
+Dense vector representation
+    ↓
+FAISS index search (approximate nearest neighbors)
+    ↓
+Cosine similarity ranking
+    ↓
+Top-k semantically relevant results
 ```
 
----
+## Why this matters
 
-## Installation
+Traditional keyword search fails when the user says "cheap flights" but the document says "low-cost travel options." Semantic search captures the meaning, not just the words. This is the core concept behind modern RAG (Retrieval-Augmented Generation) pipelines used in production AI systems.
 
-Clone the repository:
+## Tech stack
+
+- **PyTorch** — transformer model inference
+- **Sentence Transformers** — pre-trained embedding models
+- **FAISS** — efficient similarity search index
+- **Flask** — lightweight web interface
+- **Python** — core implementation
+
+## How to run
 
 ```bash
-git clone https://github.com/miladiamor/semantic-search-engine.git
-cd semantic-search-engine
+# 1. Install dependencies
+pip install torch sentence-transformers faiss-cpu flask
+
+# 2. Run the app
+python app.py
+
+# 3. Open in browser
+http://localhost:5000
 ```
 
-Install dependencies:
+## Project context
 
-```bash
-pip install -r requirements.txt
-```
+Built as part of coursework at Berliner Hochschule für Technik (BHT), 2026.
 
----
-
-## Run Terminal Search
-
-```bash
-python src/main.py
-```
-
----
-
-## Run Flask API + Web App
-
-```bash
-python src/api.py
-```
-
-Open in browser:
-
-```text
-http://127.0.0.1:5000
-```
-
----
-
-## Example API Request
-
-```powershell
-Invoke-RestMethod -Uri "http://127.0.0.1:5000/search" `
--Method POST `
--ContentType "application/json" `
--Body '{"query":"fix my bicycle"}'
-```
-
----
-
-## How It Works
-
-1. Documents are converted into embeddings using a transformer model.
-2. Embeddings are normalized and indexed using FAISS.
-3. User queries are converted into embeddings.
-4. FAISS retrieves the nearest semantic matches.
-5. Results are returned through the API or web interface.
-
----
-
-## Future Improvements
-
-- Larger document datasets
-- PDF document ingestion
-- Docker deployment
-- Cloud deployment
-- Hybrid keyword + semantic search
-- Multi-language support
-
----
-
-## Author
-
-Milad Amor
+**Author:** Amor Miladi
